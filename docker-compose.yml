@@ -1,0 +1,21 @@
+# docker network create -d bridge --gateway 180.20.1.1 --subnet 180.20.1.0/24 --attachable my_private_network
+
+version: '3'
+services:
+  jenkins:
+    container_name: jenkins
+    build: 
+      context: jenkins_image
+    # image: jenkins/jenkins:lts
+    ports:
+    - "8010:8080"
+    volumes:
+    - $PWD/jenkins_home:/var/jenkins_home
+    - $PWD/my_jobs:/opt/my_jobs
+    restart: always
+    networks:
+    - my_private_network
+
+networks:
+  my_private_network:
+    external: true
