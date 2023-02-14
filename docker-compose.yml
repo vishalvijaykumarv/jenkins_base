@@ -12,6 +12,7 @@ services:
     volumes:
     - $PWD/jenkins_home:/var/jenkins_home
     - $PWD/my_jobs:/opt/my_jobs
+    - /var/run/docker.sock:/var/run/docker.sock
     restart: always
     networks:
     - my_private_network
